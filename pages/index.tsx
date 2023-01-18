@@ -10,11 +10,24 @@ import 'bootstrap/dist/css/bootstrap.css';
 export default function Home() {
   const [weatherData, setWeatherData] = useState<OpenWeatherApiResponse | null>(null)
   const [isLoading, setLoading] = useState<Boolean>(false)
-  const [locationQuery, setLocationQuery] = useState<LocationQuery>({ q: "Seattle" })
+  const [locationQuery, setLocationQuery] = useState<LocationQuery | null>(null)
 
   useEffect(() => {
-    requestData();
+    if (locationQuery) {
+      requestData();
+    }
   }, [locationQuery])
+
+  useEffect(() => {
+    if (navigator.geolocation && locationQuery === null) {
+      setLoading(true)
+      navigator.geolocation.getCurrentPosition(pos => {
+        setLocationQuery({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+      }, err => {
+        setLocationQuery({ q: "Seattle" });
+      });
+    }
+  });
 
   const requestData = () => {
     setLoading(true)
@@ -22,6 +35,7 @@ export default function Home() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        console.log("data: " + data.main.temp)
         setWeatherData(data)
         setLoading(false)
       })
@@ -42,7 +56,7 @@ export default function Home() {
       </div>
       <div className="col-8">
       { isLoading && <p>Loading...</p> }
-      { !weatherFound && <p>Not able to find weather for this query</p>}
+      { !isLoading && !weatherFound && <p>Not able to find weather for this query</p>}
       { !isLoading && weatherFound && <WeatherDisplayView weatherData={ weatherData as any }></WeatherDisplayView> }
       </div>
     </div>

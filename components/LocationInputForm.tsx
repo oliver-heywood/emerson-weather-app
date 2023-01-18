@@ -2,10 +2,6 @@ import { useState } from "react";
 
 export type LocationInputType = "COORDINATES" | "ZIP" | "CITY_NAME"
 
-export interface LocationInputFormProps {
-    onSubmitForm: (query: LocationQuery) => void;
-}
-
 export interface LocationQuery {
     q?: string;
     zip?: number;
@@ -13,11 +9,14 @@ export interface LocationQuery {
     lon?: number;
 }
 
+export interface LocationInputFormProps {
+    onSubmitForm: (query: LocationQuery) => void;
+}
+
 const LocationInputForm = (props: LocationInputFormProps) => {
     const { onSubmitForm } = props;
-    
     const [locationInputType, setLocationInputType] = useState<LocationInputType>("CITY_NAME");
-    const [location, setLocation] = useState<LocationQuery>({});
+    const [location, setLocation] = useState<LocationQuery>({ q: ""});
     
     const handleInputChange = (e: any) => {
         let field = e.target.name;
@@ -49,8 +48,9 @@ const LocationInputForm = (props: LocationInputFormProps) => {
                         id="type" 
                         onChange={handleSelectChange}
                         className="form-select"
+                        value={locationInputType}
                     >
-                        <option selected value="CITY_NAME">By City Name</option>
+                        <option value="CITY_NAME">By City Name</option>
                         <option value="ZIP">By Zip Code</option>
                         <option value="COORDINATES">By Latitude and Longitude</option>
                     </select>
