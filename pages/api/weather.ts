@@ -14,6 +14,6 @@ export default async function handler(
     let weatherData = await openWeatherService.GetCurrentWeatherForLocation(req.query);
     res.status(200).json(weatherData);
   } catch (e) {
-    res.status(500).json(e);
+    res.status(500).json(e as any);
   }
 }

@@ -19,7 +19,7 @@ const LocationInputForm = (props: LocationInputFormProps) => {
     const [locationInputType, setLocationInputType] = useState<LocationInputType>("CITY_NAME");
     const [location, setLocation] = useState<LocationQuery>({});
     
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         let field = e.target.name;
         let value = e.target.value;
         if (field === "zip" || field === "lat" || field === "lon") {
@@ -28,7 +28,7 @@ const LocationInputForm = (props: LocationInputFormProps) => {
         setLocation({...location, [field]: value })
     }
 
-    const handleSelectChange = (e) => {
+    const handleSelectChange = (e: any) => {
         setLocationInputType(e.target.value as LocationInputType);
         setLocation({});
     }
@@ -94,8 +94,8 @@ const LocationInputForm = (props: LocationInputFormProps) => {
                     ></input>
                 </div>
             }
+            <button type="submit">Check Weather!</button>
             </form>
-            <button onClick={() => onSubmitForm(location)}>Check Weather!</button>
         </div>
     )
 }
