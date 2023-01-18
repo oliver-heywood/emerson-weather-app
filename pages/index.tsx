@@ -3,8 +3,9 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css';
 import { useState, useEffect } from 'react'
 import LocationInputForm, { LocationQuery } from '../components/LocationInputForm';
-import { OpenWeatherApiResponse } from '../types/open_weather_api_response';
+import { OpenWeatherApiResponse } from '../types/OpenWeatherApiResponse';
 import WeatherDisplayView from '../components/WeatherDisplayView';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<OpenWeatherApiResponse | null>(null)
@@ -29,16 +30,21 @@ export default function Home() {
   const onSubmitForm = (query: LocationQuery) => {
     setLocationQuery(query);
   }
+
+  let weatherFound: Boolean = !!weatherData && !!weatherData.weather;
   
   return (
-    <div>
-      <div>
+    <div className="row p-3">
+      <div className="col">
         <LocationInputForm
           onSubmitForm={onSubmitForm}
         />
       </div>
+      <div className="col-8">
       { isLoading && <p>Loading...</p> }
-      { !isLoading && <WeatherDisplayView weatherData={ weatherData }></WeatherDisplayView> }
+      { !weatherFound && <p>Not able to find weather for this query</p>}
+      { !isLoading && weatherFound && <WeatherDisplayView weatherData={ weatherData as any }></WeatherDisplayView> }
+      </div>
     </div>
   )
 }

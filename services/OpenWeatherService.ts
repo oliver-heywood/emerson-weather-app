@@ -1,6 +1,6 @@
-import { OpenWeatherApiResponse } from "../types/open_weather_api_response";
+import { OpenWeatherApiResponse } from "../types/OpenWeatherApiResponse";
 import { Axios } from "axios";
-import { OpenWeatherAPIQueryParams } from "../types/open_weather_api_query_params";
+import { OpenWeatherAPIQueryParams } from "../types/OpenWeatherApiQueryParams";
 
 export class OpenWeatherService {
     private service = new Axios({

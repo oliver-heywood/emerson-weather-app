@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { NextApiRequest, NextApiResponse } from 'next'
-import { OpenWeatherApiResponse } from '../../types/open_weather_api_response';
-import { OpenWeatherService } from '../../services/open_weather_service';
-import { OpenWeatherAPIQueryParams } from '../../types/open_weather_api_query_params';
+import { OpenWeatherApiResponse } from '../../types/OpenWeatherApiResponse';
+import { OpenWeatherService } from '../../services/OpenWeatherService';
+import { OpenWeatherAPIQueryParams } from '../../types/OpenWeatherApiQueryParams';
 
 const openWeatherService = new OpenWeatherService();
 

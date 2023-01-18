@@ -8,7 +8,11 @@ This app uses the [NextJS Framework](https://nextjs.org/learn/foundations/about-
 
 ## Building Locally 
 
+Requirements - Node.js version 14.x.x or higher.
+
 In the root folder install dependencies with `npm install`. 
+
+Copy contents of `.example.env` to a new file `.env` and save a value for OPEN_WEATHER_APP_ID
 
 Then run `npm run dev` to start a local development server on http://localhost:3000. 
 

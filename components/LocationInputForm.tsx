@@ -42,15 +42,22 @@ const LocationInputForm = (props: LocationInputFormProps) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="type">How would you like to check the weather?</label>
-                <select name="type" id="type" onChange={handleSelectChange}>
-                    <option selected value="CITY_NAME">By City Name</option>
-                    <option value="ZIP">By Zip Code</option>
-                    <option value="COORDINATES">By Latitude and Longitude</option>
-                </select>
+                <div className="mb-3">
+                    <label htmlFor="type" className="form-label">How would you like to check the weather?</label>
+                    <select 
+                        name="type" 
+                        id="type" 
+                        onChange={handleSelectChange}
+                        className="form-select"
+                    >
+                        <option selected value="CITY_NAME">By City Name</option>
+                        <option value="ZIP">By Zip Code</option>
+                        <option value="COORDINATES">By Latitude and Longitude</option>
+                    </select>
+                </div>
                 { locationInputType === "CITY_NAME" && 
-                    <div>
-                        <label htmlFor="city">City Name:</label>
+                    <div className="mb-3">
+                        <label htmlFor="city" className="form-label">City Name:</label>
                         <input 
                             id="city" 
                             name="q" 
@@ -58,12 +65,13 @@ const LocationInputForm = (props: LocationInputFormProps) => {
                             value={location.q} 
                             onChange={handleInputChange}
                             required
+                            className="form-control"
                         ></input>
                     </div>
                 }
                 { locationInputType === "ZIP" && 
-                    <div>
-                        <label htmlFor="zip">Zip Code:</label>
+                    <div className="mb-3">
+                        <label htmlFor="zip" className="form-label">Zip Code:</label>
                         <input 
                             id="zip" 
                             name="zip" 
@@ -71,36 +79,43 @@ const LocationInputForm = (props: LocationInputFormProps) => {
                             value={location.zip} 
                             onChange={handleInputChange}
                             required
+                            className="form-control"
                         ></input>
                     </div>
                 }                
                 { locationInputType === "COORDINATES" && 
-                <div>
-                    <label htmlFor="latitude">Latitude:</label>
-                    <input 
-                        id="latitude" 
-                        name="lat" 
-                        type="number" 
-                        value={location.lat} 
-                        onChange={handleInputChange}
-                        max="90"
-                        min="-90"
-                        required
-                    ></input>
-                    <label htmlFor="longitude">Longitude:</label>
-                    <input 
-                        id="longitude" 
-                        name="lon" 
-                        type="number" 
-                        value={location.lon} 
-                        onChange={handleInputChange}
-                        max="180"
-                        min="-180"
-                        required
-                    ></input>
+                <div className="mb-3 row">
+                    <div className="col"> 
+                        <label htmlFor="latitude" className="form-label">Latitude:</label>
+                        <input 
+                            id="latitude" 
+                            name="lat" 
+                            type="number" 
+                            value={location.lat} 
+                            onChange={handleInputChange}
+                            max="90"
+                            min="-90"
+                            required
+                            className="form-control"
+                        ></input>
+                    </div>
+                    <div className="col"> 
+                        <label htmlFor="longitude" className="form-label">Longitude:</label>
+                        <input 
+                            id="longitude" 
+                            name="lon" 
+                            type="number" 
+                            value={location.lon} 
+                            onChange={handleInputChange}
+                            max="180"
+                            min="-180"
+                            required
+                            className="form-control"
+                        ></input>
+                    </div>
                 </div>
             }
-            <button type="submit">Check Weather!</button>
+            <button type="submit" className="btn btn-primary">Check Weather!</button>
             </form>
         </div>
     )
