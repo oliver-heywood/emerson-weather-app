@@ -31,11 +31,17 @@ const LocationInputForm = (props: LocationInputFormProps) => {
     const handleSelectChange = (e: any) => {
         setLocationInputType(e.target.value as LocationInputType);
         setLocation({});
+        e.preventDefault();
+    }
+
+    const handleSubmit = (e: any) => {
+        onSubmitForm(location);
+        e.preventDefault();
     }
     
     return (
         <div>
-            <form onSubmit={() => onSubmitForm(location)}>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="type">How would you like to check the weather?</label>
                 <select name="type" id="type" onChange={handleSelectChange}>
                     <option selected value="CITY_NAME">By City Name</option>
