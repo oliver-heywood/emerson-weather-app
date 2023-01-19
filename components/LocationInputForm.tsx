@@ -10,36 +10,37 @@ export interface LocationQuery {
 }
 
 export interface LocationInputFormProps {
+    isFormDisabled: Boolean;
     onSubmitForm: (query: LocationQuery) => void;
 }
 
 const LocationInputForm = (props: LocationInputFormProps) => {
-    const { onSubmitForm } = props;
+    const { onSubmitForm, isFormDisabled } = props;
     const [locationInputType, setLocationInputType] = useState<LocationInputType>("CITY_NAME");
     const [location, setLocation] = useState<LocationQuery>({ q: ""});
     
-    const handleInputChange = (e: any) => {
-        let field = e.target.name;
-        let value = e.target.value;
+    const handleInputChange = (event: any): void => {
+        let field = event.target.name;
+        let value = event.target.value;
         if (field === "zip" || field === "lat" || field === "lon") {
             value = Number(value);
         } 
         setLocation({...location, [field]: value })
     }
 
-    const handleSelectChange = (e: any) => {
-        setLocationInputType(e.target.value as LocationInputType);
+    const handleSelectChange = (event: any): void => {
+        setLocationInputType(event.target.value as LocationInputType);
         setLocation({});
-        e.preventDefault();
+        event.preventDefault();
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: any): void => {
         onSubmitForm(location);
         e.preventDefault();
     }
     
     return (
-        <div>
+        <fieldset disabled={isFormDisabled}>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="type" className="form-label">How would you like to check the weather?</label>
@@ -117,7 +118,7 @@ const LocationInputForm = (props: LocationInputFormProps) => {
             }
             <button type="submit" className="btn btn-primary">Check Weather!</button>
             </form>
-        </div>
+        </fieldset>
     )
 }
 

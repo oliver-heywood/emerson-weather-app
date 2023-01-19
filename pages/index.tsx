@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css';
 import { useState, useEffect } from 'react'
 import LocationInputForm, { LocationQuery } from '../components/LocationInputForm';
 import { OpenWeatherApiResponse } from '../types/OpenWeatherApiResponse';
@@ -29,28 +26,28 @@ export default function Home() {
     }
   });
 
-  const requestData = () => {
+  const requestData = (): void => {
     setLoading(true)
     let url = '/api/weather?' + new URLSearchParams(locationQuery as any);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data: " + data.main.temp)
         setWeatherData(data)
         setLoading(false)
       })
   }
 
-  const onSubmitForm = (query: LocationQuery) => {
+  const onSubmitForm = (query: LocationQuery): void => {
     setLocationQuery(query);
   }
 
   let weatherFound: Boolean = !!weatherData && !!weatherData.weather;
-  
+
   return (
     <div className="row p-3">
       <div className="col">
         <LocationInputForm
+          isFormDisabled={locationQuery === null}
           onSubmitForm={onSubmitForm}
         />
       </div>
