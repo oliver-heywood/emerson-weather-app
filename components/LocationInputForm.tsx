@@ -10,7 +10,7 @@ export interface LocationQuery {
 }
 
 export interface LocationInputFormProps {
-    isFormDisabled: Boolean;
+    isFormDisabled: boolean;
     onSubmitForm: (query: LocationQuery) => void;
 }
 
