@@ -3,6 +3,7 @@ import LocationInputForm, { LocationQuery } from '../components/LocationInputFor
 import { OpenWeatherApiResponse } from '../types/OpenWeatherApiResponse';
 import WeatherDisplayView from '../components/WeatherDisplayView';
 import 'bootstrap/dist/css/bootstrap.css';
+import ReactLoading from 'react-loading';
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<OpenWeatherApiResponse | null>(null)
@@ -52,7 +53,7 @@ export default function Home() {
         />
       </div>
       <div className="col-8">
-      { isLoading && <p>Loading...</p> }
+      { isLoading && <ReactLoading type="spokes" color="#000000" height={200} width={200} /> }
       { !isLoading && !weatherFound && <p>Not able to find weather for this query</p>}
       { !isLoading && weatherFound && <WeatherDisplayView weatherData={ weatherData as any }></WeatherDisplayView> }
       </div>
